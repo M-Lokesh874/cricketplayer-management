@@ -1,0 +1,5 @@
+2022-10-18 00:32:32,321 ERROR c.p.u.PlayerManagementLogger [main] Something went wrong
+2022-10-18 10:12:21,654 ERROR c.p.u.PlayerManagementLogger [main] Invalid input
+2022-10-18 12:32:18,896 ERROR o.h.e.j.s.SqlExceptionHelper [main] Table 'playermanagement.cricketplayerstats' doesn't exist
+2022-10-18 13:47:59,446 ERROR c.p.u.PlayerManagementLogger [main] Something went wrong
+2022-11-04 07:35:17,176 ERROR o.h.e.j.s.SqlExceptionHelper [main] Field 'captainId' doesn't have a default value
