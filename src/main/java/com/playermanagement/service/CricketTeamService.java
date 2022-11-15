@@ -16,7 +16,7 @@ import com.playermanagement.util.exception.PlayerManagementException;
  */
 public interface CricketTeamService {
 
-	public List<CricketTeam> getTeams();
+	public List<CricketTeam> getTeams() throws PlayerManagementException;
 
 	public CricketTeam getTeamAndPlayers(CricketTeam cricketTeam, int teamId) throws PlayerManagementException;
 

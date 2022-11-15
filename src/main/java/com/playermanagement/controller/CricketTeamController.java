@@ -101,8 +101,12 @@ public class CricketTeamController {
 	 */
 	public void displayTeams() {
 		System.out.println("All cricket teams");
+		try {
 		List<CricketTeam> cricketTeams = cricketTeamService.getTeams();
 		cricketTeams.forEach(team -> System.out.println(team));
+		} catch (PlayerManagementException playerManagementException) {
+			PlayerManagementLogger.error(playerManagementException);
+		}
 	}
 
 	/**

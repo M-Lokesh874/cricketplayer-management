@@ -4,8 +4,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored = "false" %>
- <!DOCTYPE html>
-<html>
+<%-- <!DOCTYPE html>
+ <html>
 <head>
 <meta charset="UTF-8">
 <title>Display players</title>
@@ -19,10 +19,9 @@ ${player.id}
 </c:forEach>
   ${cricketPlayers}
 </body>
-</html>
+</html> --%>
     
-<%-- <!DOCTYPE html>
-<% List<CricketPlayer> cricketPlayers = (List<CricketPlayer>) session.getAttribute("cricketPlayers"); %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -33,8 +32,8 @@ ${player.id}
 </head>
 <body>
 
-<li><a href = "home.jsp"> <button class="btn btn-success">Home</button></a></li><br>
-<li><a href="cricketPlayer.jsp"> <button class="btn btn-success">Back</button></a></li><br>
+<li><a href = "index"> <button class="btn btn-success">Home</button></a></li><br>
+<li><a href="cricketPlayer"> <button class="btn btn-success">Back</button></a></li><br>
 
 <div align = "center">
 <h1>Display players</h1>
@@ -42,11 +41,12 @@ ${player.id}
 <form action="displayplayers" method="get">
 </form>
 </div>
+<% if(request.getAttribute("cricketPlayers") != null) { %>
+<% List<CricketPlayer> cricketPlayers = (List<CricketPlayer>) request.getAttribute("cricketPlayers");%>
 <% if(cricketPlayers != null) { %>
 <% for(CricketPlayer cricketPlayer : cricketPlayers) { %>
 <table class="table bg-info bordered">
 
-<tr><td> Id of an employee</td> <td><input readonly value=<%=cricketPlayer.getId()%>></td></tr>
 <tr><td> Id : </td><td><%= cricketPlayer.getId() %></td></tr>
 <tr><td> Player Code :</td><td><%=cricketPlayer.getPlayerCode() %></td></tr>
 <tr><td> Name : </td><td> <%= cricketPlayer.getName() %> </td></tr>
@@ -55,7 +55,7 @@ ${player.id}
 <tr><td> Email : </td><td><%= cricketPlayer.getEmail() %></td></tr>
 
 </table>
-<%} %>
-<%} %>
+<%} }%>
+<% }%>
 </body>
-</html> --%>
+</html>

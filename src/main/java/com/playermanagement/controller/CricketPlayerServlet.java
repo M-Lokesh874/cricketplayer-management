@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(urlPatterns={"/CricketPlayerServlet","/createplayer", "/displayplayerbyid","/deleteplayerbyid", "/updateplayerbyid", 
+@WebServlet(urlPatterns={"/CricketPlayerServlet","/deleteplayerbyid", "/updateplayerbyid", 
 		    "/getplayerbyid", "/searchplayerbyid", "/displayplayersbetweendateofbirth", "/displayplayersbymultipleids",
 		    "/assignteam"})
 public class CricketPlayerServlet extends HttpServlet {
@@ -50,7 +50,8 @@ public class CricketPlayerServlet extends HttpServlet {
                     createPlayer(request, response);
                     break;
                     
-			    case "/displayplayers": displayPlayers(request, response);
+			    case "/displayplayers": 
+			    	displayPlayers(request, response);
 				    break;		 
                     
                 case "/displayplayerbyid":

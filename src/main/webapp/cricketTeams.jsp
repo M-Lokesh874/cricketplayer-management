@@ -16,8 +16,8 @@
   <h1> Cricket team....!</h1><br>
       <table>
         <tr><td><a href ="createTeam.jsp"><button type="button" class="btn-info btn-sm">create team</button></a><br></td></tr>
-        <tr><td><a href ="displayTeam.jsp"><button type="button" class="btn-info btn-sm">display teams</button></a><br></td></tr>
-        <tr><td><a href ="getTeam.jsp"><button type="button" class="btn-info btn-sm">display team by id</button></a><br></td></tr>
+        <tr><td><a href ="displayteams"><button type="button" class="btn-info btn-sm">display teams</button></a><br></td></tr>
+        <tr><td><a href ="getteam"><button type="button" class="btn-info btn-sm">display team by id</button></a><br></td></tr>
         <tr><td><a href ="deleteTeam.jsp"><button type="button" class="btn-info btn-sm">delete team by id</button></a><br></td></tr>
         <tr><td><a href ="updateTeam.jsp"><button type="button" class="btn-info btn-sm">update team by id</button></a><br></td></tr>
         <tr><td><a href ="assignPlayer.jsp"><button type="button" class="btn-info btn-sm">assign player</button></a><br></td></tr>

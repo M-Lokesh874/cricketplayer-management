@@ -10,7 +10,9 @@ import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 @MappedSuperclass
 public class BaseModel {

@@ -109,5 +109,7 @@ public interface CricketPlayerService {
 	 * @param dateTwo - second dateOfBirth given by user
 	 */
 	public List<CricketPlayer> retrievePlayersBetweenDate(Date startDate, Date endDate) throws PlayerManagementException;
+
+	public CricketPlayer createPlayer(CricketPlayer cricketPlayer) throws PlayerManagementException;
 	;
 }

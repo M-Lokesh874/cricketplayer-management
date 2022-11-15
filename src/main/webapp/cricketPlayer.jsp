@@ -22,7 +22,7 @@
 		<br>
 		<table>
 			<tr>
-				<td><a href="createPlayer.jsp"><button type="button"
+				<td><a href="createplayer"><button type="button"
 							class="btn-info btn-sm">create player</button></a><br></td>
 			</tr>
 			<form action="displayplayers" method="get">
@@ -32,7 +32,7 @@
 				</tr>
 			</form>
 			<tr>
-				<td><a href="getPlayer.jsp"><button type="button"
+				<td><a href="getplayer"><button type="button"
 							class="btn-info btn-sm">display player by id</button></a><br></td>
 			</tr>
 			<tr>

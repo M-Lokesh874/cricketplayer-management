@@ -3,26 +3,31 @@ package com.playermanagement.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Component;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
-
 import com.playermanagement.dao.CricketTeamDao;
 import com.playermanagement.model.CricketTeam;
 import com.playermanagement.model.CricketPlayer;
 import com.playermanagement.util.connection.HibernateConnection;
 import com.playermanagement.util.exception.PlayerManagementException;
 
+@Component
 public class CricketTeamDaoImpl implements CricketTeamDao {
 
 	/**
 	 * {@inheritDoc}
 	 *
 	 */
+	
+	@Autowired
+	private HibernateTemplate hibernateTemplate;
+	
 	public CricketTeam insertTeam(CricketTeam cricketTeam) throws PlayerManagementException {
 		SessionFactory sessionFactory = null;
 		Session session = null;
@@ -43,24 +48,16 @@ public class CricketTeamDaoImpl implements CricketTeamDao {
 
 	/**
 	 * {@inheritDoc}
+	 * @throws PlayerManagementException 
 	 *
 	 */
-	public List<CricketTeam> retrieveTeams() {
-		List<CricketTeam> cricketTeams = new ArrayList<>();
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		try {
-			sessionFactory = HibernateConnection.getSessionFactory();
-			session = sessionFactory.openSession();
-			Criteria criteria = session.createCriteria(CricketTeam.class);
-			cricketTeams = (List<CricketTeam>) criteria.list();
+	public List<CricketTeam> retrieveTeams() throws PlayerManagementException {
+        try {
+        	List<CricketTeam> cricketTeams = this.hibernateTemplate.loadAll(CricketTeam.class);
+        	return cricketTeams;
 		} catch (HibernateException hibernateException) {
-			System.out.println(hibernateException);
-		} finally {
-			session.close();
-		}
-		return cricketTeams;
-
+			throw new PlayerManagementException(hibernateException.getMessage());
+		} 
 	}
 
 	/**
@@ -68,20 +65,11 @@ public class CricketTeamDaoImpl implements CricketTeamDao {
 	 *
 	 */
 	public CricketTeam getTeamById(int id) throws PlayerManagementException {
-		CricketTeam cricketTeam = new CricketTeam();
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		try {
-			sessionFactory = HibernateConnection.getSessionFactory();
-			session = sessionFactory.openSession();
-			Criteria criteria = session.createCriteria(CricketTeam.class, "id");
-			criteria.add(Restrictions.eq("id", id));
-			cricketTeam = (CricketTeam) criteria.uniqueResult();
+	    try {
+			CricketTeam cricketTeam = this.hibernateTemplate.get(CricketTeam.class, id);
 			return cricketTeam;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
-		} finally {
-			session.close();
 		}
 	}
 

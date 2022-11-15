@@ -2,6 +2,9 @@ package com.playermanagement.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.playermanagement.dao.CricketTeamDao;
 import com.playermanagement.dao.impl.CricketTeamDaoImpl;
 import com.playermanagement.model.CricketPlayer;
@@ -18,11 +21,13 @@ import com.playermanagement.util.exception.PlayerManagementException;
  *
  * @author Lokesh
  */
+@Service
 public class CricketTeamServiceImpl implements CricketTeamService {
 
-	CricketTeamDao cricketTeamDao = new CricketTeamDaoImpl();
+	@Autowired
+	private CricketTeamDao cricketTeamDao;
 
-	public List<CricketTeam> getTeams() {
+	public List<CricketTeam> getTeams() throws PlayerManagementException {
 		return cricketTeamDao.retrieveTeams();
 	}
 

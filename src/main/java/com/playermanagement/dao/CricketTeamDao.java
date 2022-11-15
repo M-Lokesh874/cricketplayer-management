@@ -7,7 +7,7 @@ import com.playermanagement.util.exception.PlayerManagementException;
 
 public interface CricketTeamDao {
 
-	public List<CricketTeam> retrieveTeams();
+	public List<CricketTeam> retrieveTeams() throws PlayerManagementException;
 
 	public CricketTeam retrieveTeamAndPlayers(CricketTeam cricketTeam, int teamId) throws PlayerManagementException;
 

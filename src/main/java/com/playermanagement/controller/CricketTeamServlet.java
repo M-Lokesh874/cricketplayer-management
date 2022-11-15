@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = {"/CricketTeamServlet", "/createteam", "/displayteams", "/displayteambyid", "/deleteteambyid", "/updateteambyid", "/getteambyid",
+@WebServlet(urlPatterns = {"/CricketTeamServlet", "/createteam", "/displayteambyid", "/deleteteambyid", "/updateteambyid",
 		"/assigncaptain", "/assignwicketkeeper"})
 public class CricketTeamServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -185,10 +185,14 @@ public class CricketTeamServlet extends HttpServlet {
 	}
 
 	private void displayTeams(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
 		List<CricketTeam> cricketTeams = cricketTeamService.getTeams();
 		HttpSession session = request.getSession();
 		session.setAttribute("cricketTeams", cricketTeams);
 		response.sendRedirect("displayTeam.jsp");	
+		} catch (PlayerManagementException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void createTeam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

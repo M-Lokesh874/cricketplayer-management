@@ -187,4 +187,10 @@ public class CricketPlayerServiceImpl implements CricketPlayerService {
 		return cricketPlayerDao.updatePlayer(cricketPlayer);
 	}
 
+	@Override
+	public CricketPlayer createPlayer(CricketPlayer cricketPlayer) throws PlayerManagementException {
+		cricketPlayer.setPlayerCode(generateId());
+		return cricketPlayerDao.insertPlayer(cricketPlayer);
+	}
+
 }

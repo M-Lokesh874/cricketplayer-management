@@ -1,5 +1,9 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +14,34 @@
 
 </head>
 <body>
-<ul type="square">
-	<li><a href="home.jsp">
+<%-- 	<h1>Create player</h1>
+<table>
+	<form:form action="create-player"  modelAttribute="cricketPlayer" method="post">
+		<label for="name">Name </label>
+		<form:input path="name"  id = "name"/>
+
+		<label>Country</label>
+		<form:input path="country" />
+
+		<label>Gender</label>
+		<form:radiobuttons path="gender" />
+				
+		<label>Date of birth </label>
+		<form:input path="dateOfBirth" placeholder = "dd/mm/yyyy"/>
+
+		<label>Email</label>
+		<form:input path="email" />
+
+		<input type="submit" value="submit">
+	</form:form>
+</table>
+</body>
+</html> --%>
+ <ul type="square">
+	<li><a href="index">
 			<button class="btn btn-success">Home</button>
 	</a></li>
-	<li><a href="cricketPlayer.jsp">
+	<li><a href="cricketPlayer">
 			<button class="btn btn-success">Back</button>
 	</a></li>
 	</ul>
@@ -23,34 +50,35 @@
 	<div align="center">
 		<h1>Add new player</h1>
 
-		<form action="createplayer" method="post">
+		<form:form action="create-player" modelAttribute="cricketPlayer" method="post">
 			<table class="table bg-info">
 				<tr>
 					<td>Name</td>
-					<td><input type="text" name="name">
+					<td><form:input  path ="name"/></td>
 				</tr>
 
 				<tr>
 					<td>Date of Birth</td>
-					<td><input type="date" name="dateofbirth"></td>
+					<td><form:input path ="dateOfBirth" placeholder = "dd/mm/yyyy"/></td>
 				</tr>
 
 				<tr>
 					<td>Country</td>
-					<td><input type="text" name="country"></td>
+					<td><form:input path ="country" /></td>
 				</tr>
 
 				<tr>
 				<tr>
 					<td>Gender</td>
-					<td><input type="radio" name="gender" value="FEMALE" id="female"> <label for="female">FEMALE</label>
-						<input type="radio" name="gender" value="MALE" id="male"> MALE</td>
+					<td><%-- <input type="radio" name="gender" value="FEMALE" id="female"> <label for="female">FEMALE</label>
+						<input type="radio" name="gender" value="MALE" id="male"> MALE</td> --%>
+						<form:radiobuttons path ="gender" />
 				</tr>
 
 
 				<tr>
 					<td>Email</td>
-					<td><input type="text" name="email"></td>
+					<td><form:input path ="email" /></td>
 				</tr>
 
 			</table>
@@ -58,7 +86,7 @@
 			<input type="submit" name="sumbit" value="Register"
 				<div class="button btn-info btn-sm"></div >>
 
-		</form>
+		</form:form>
 	</div>
 </body>
 </html>
