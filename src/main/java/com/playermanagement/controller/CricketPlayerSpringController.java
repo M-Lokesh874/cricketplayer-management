@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,11 +62,34 @@ public class CricketPlayerSpringController {
 	    try {
 			cricketPlayerService.createPlayer(cricketPlayer);
 			redirectView.setUrl("displayplayers");
-			//model.addAttribute("cricketPlayers", cricketPlayer);
 		} catch (PlayerManagementException e) {
 			e.printStackTrace();
 		}
-		return redirectView;//getPlayers(model)
+		return redirectView;
+	}
+	
+	@RequestMapping("/updateplayer")
+	public String updatePlayer(@ModelAttribute("cricketPlayer") CricketPlayer cricketPlayer) {
+		try {
+			cricketPlayer = cricketPlayerService.updatePlayerById(cricketPlayer);
+		} catch (PlayerManagementException e) {
+			e.printStackTrace();
+		}
+		return "displayPlayer";
+	}
+	
+	@RequestMapping("/getplayerbyid")
+	public String getPlayer(HttpServletRequest request, @RequestParam(value = "id", required = false) Integer id,
+			Model model) {
+		try {
+			if (null != id) {
+				CricketPlayer cricketPlayer = cricketPlayerService.getPlayerById(id);
+				model.addAttribute("cricketPlayer", cricketPlayer);
+			}
+		} catch (PlayerManagementException e) {
+			e.printStackTrace();
+		}
+		return "updatePlayer";
 	}
 
 	@RequestMapping("/index")

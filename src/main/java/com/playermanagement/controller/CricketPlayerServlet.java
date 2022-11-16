@@ -29,8 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(urlPatterns={"/CricketPlayerServlet","/deleteplayerbyid", "/updateplayerbyid", 
-		    "/getplayerbyid", "/searchplayerbyid", "/displayplayersbetweendateofbirth", "/displayplayersbymultipleids",
+@WebServlet(urlPatterns={"/CricketPlayerServlet","/deleteplayerbyid", "/searchplayerbyid", "/displayplayersbetweendateofbirth", "/displayplayersbymultipleids",
 		    "/assignteam"})
 public class CricketPlayerServlet extends HttpServlet {
 

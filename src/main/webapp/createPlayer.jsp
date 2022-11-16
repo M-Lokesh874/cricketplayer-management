@@ -14,29 +14,6 @@
 
 </head>
 <body>
-<%-- 	<h1>Create player</h1>
-<table>
-	<form:form action="create-player"  modelAttribute="cricketPlayer" method="post">
-		<label for="name">Name </label>
-		<form:input path="name"  id = "name"/>
-
-		<label>Country</label>
-		<form:input path="country" />
-
-		<label>Gender</label>
-		<form:radiobuttons path="gender" />
-				
-		<label>Date of birth </label>
-		<form:input path="dateOfBirth" placeholder = "dd/mm/yyyy"/>
-
-		<label>Email</label>
-		<form:input path="email" />
-
-		<input type="submit" value="submit">
-	</form:form>
-</table>
-</body>
-</html> --%>
  <ul type="square">
 	<li><a href="index">
 			<button class="btn btn-success">Home</button>
