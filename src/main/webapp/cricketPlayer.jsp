@@ -36,11 +36,11 @@
 							class="btn-info btn-sm">display player by id</button></a><br></td>
 			</tr>
 			<tr>
-				<td><a href="getplayerbyid"><button type="button"
+				<td><a href="updateplayer"><button type="button"
 							class="btn-info btn-sm">update player</button></a><br></td>
 			</tr>
 			<tr>
-				<td><a href="deletePlayer.jsp"><button type="button"
+				<td><a href="deleteplayer"><button type="button"
 							class="btn-info btn-sm">delete player</button></a><br></td>
 			</tr>
 			<tr>

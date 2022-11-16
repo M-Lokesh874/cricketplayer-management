@@ -16,7 +16,7 @@
 	</a></li>
 	<div align="center">
 		<h1>Update stats</h1>
-		<form action="getstatsbyid" method = "get">
+		<form action="getstatsbyid" method="get">
 			Id:<input type="number" name="id"> <input type="submit"
 				name="submit" value="click here"
 				<div class="button btn-info btn-sm"></div >>

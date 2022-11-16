@@ -73,19 +73,19 @@ public interface CricketPlayerDao {
 	 */
 	public List<CricketPlayer> searchPlayerByName(String name) throws PlayerManagementException;
 
-	/**
-	 * <p>
-	 * This method is used to get players by group of ids.
-	 * </p>
-	 *
-	 */
-	public List<CricketPlayer> getPlayersGivenIds(StringBuffer playerIds) throws PlayerManagementException;
+
 
 	public boolean assignTeam(CricketPlayer cricketPlayer) throws PlayerManagementException;
 
 	public CricketPlayer updatePlayer(CricketPlayer cricketPlayer) throws PlayerManagementException;
 
-	List<CricketPlayer> retrievePlayersByMultipleIds(List<Integer> playerIds) throws PlayerManagementException;
+	/**
+	 * <p>
+	 * This method is used to get players by multiple ids.
+	 * </p>
+	 *
+	 */
+	public List<CricketPlayer> retrievePlayersByMultipleIds(List<Integer> playerIds) throws PlayerManagementException;
 
 	/**
 	 * <p>

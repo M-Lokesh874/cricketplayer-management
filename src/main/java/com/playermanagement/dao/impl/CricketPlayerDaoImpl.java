@@ -27,21 +27,22 @@ import javax.persistence.criteria.Root;
 
 @Component
 public class CricketPlayerDaoImpl implements CricketPlayerDao {
-	
+
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
+
 	/**
 	 * {@inheritDoc}
 	 */
-	
+
 	@Transactional
 	public CricketPlayer insertPlayer(CricketPlayer cricketPlayer) throws PlayerManagementException {
 		try {
-             this.hibernateTemplate.save(cricketPlayer);
-             return cricketPlayer;
+			this.hibernateTemplate.save(cricketPlayer);
+			return cricketPlayer;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
-		} 
+		}
 	}
 
 	/**
@@ -53,7 +54,7 @@ public class CricketPlayerDaoImpl implements CricketPlayerDao {
 			return cricketPlayers;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
-		} 
+		}
 	}
 
 	/**
@@ -65,39 +66,45 @@ public class CricketPlayerDaoImpl implements CricketPlayerDao {
 			return cricketPlayer;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
-		} 
+		}
 	}
+
 	/**
 	 * {@inheritDoc}
-	 * @throws PlayerManagementException 
+	 * 
+	 * @throws PlayerManagementException
 	 */
-	/*
-	 * public boolean deletePlayerById(int id) throws PlayerManagementException {
-	 * SessionFactory sessionFactory = null; Session session = null; Transaction
-	 * transaction = null; try { sessionFactory =
-	 * HibernateConnection.getSessionFactory(); session =
-	 * sessionFactory.openSession(); transaction = session.beginTransaction();
-	 * CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-	 * CriteriaUpdate criteriaUpdate =
-	 * criteriaBuilder.createCriteriaUpdate(CricketPlayer.class); Root root =
-	 * criteriaUpdate.from(CricketPlayer.class); criteriaUpdate.set("deleted",
-	 * 1).where(root.get("id").in(id)); int row =
-	 * session.createQuery(criteriaUpdate).executeUpdate(); transaction.commit();
-	 * return 1 == row; } catch (HibernateException hibernateException) {
-	 * transaction.rollback(); ; throw new
-	 * PlayerManagementException(hibernateException.getMessage()); } finally {
-	 * session.close(); } }
-	 */
-
 	@Transactional
 	public boolean deletePlayerById(int id) throws PlayerManagementException {
 		try {
-			CricketPlayer cricketPlayer = this.hibernateTemplate.get(CricketPlayer.class, id);
+			System.out.println(id);
+			CricketPlayer cricketPlayer = this.hibernateTemplate.load(CricketPlayer.class, id);
+			if (null != cricketPlayer) {
+				this.hibernateTemplate.delete(cricketPlayer);
+				return true;
+			} else {
+				return false;
+			}
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
 		}
-		return false;
 	}
+	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@Transactional
+	public CricketPlayer updatePlayer(CricketPlayer cricketPlayer) throws PlayerManagementException {
+		try {
+			this.hibernateTemplate.update(cricketPlayer);
+		} catch (HibernateException hibernateException) {
+			throw new PlayerManagementException(hibernateException.getMessage());
+		}
+		return cricketPlayer;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -190,30 +197,6 @@ public class CricketPlayerDaoImpl implements CricketPlayerDao {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<CricketPlayer> getPlayersGivenIds(StringBuffer playerIds) throws PlayerManagementException {
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		List<CricketPlayer> cricketPlayers = new ArrayList<>();
-		try {
-			sessionFactory = HibernateConnection.getSessionFactory();
-			session = sessionFactory.openSession();
-			StringBuffer inQuery = new StringBuffer();
-			inQuery.append("from CricketPlayer where id in(");
-			inQuery.append(playerIds);
-			inQuery.append(") and is_deleted = 0");
-			Query query = session.createQuery(inQuery.toString());
-			cricketPlayers = query.list();
-			return cricketPlayers;
-		} catch (HibernateException hibernateException) {
-			throw new PlayerManagementException(hibernateException.getMessage());
-		} finally {
-			session.close();
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public boolean assignTeam(CricketPlayer cricketPlayer) throws PlayerManagementException {
 		SessionFactory sessionFactory = null;
 		Session session = null;
@@ -226,26 +209,6 @@ public class CricketPlayerDaoImpl implements CricketPlayerDao {
 			session.saveOrUpdate(cricketPlayer);
 			transaction.commit();
 			return session.contains(cricketPlayer);
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
-			throw new PlayerManagementException(hibernateException.getMessage());
-		} finally {
-			session.close();
-		}
-	}
-
-	@Override
-	public CricketPlayer updatePlayer(CricketPlayer cricketPlayer) throws PlayerManagementException {
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		Transaction transaction = null;
-		try {
-			sessionFactory = HibernateConnection.getSessionFactory();
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.saveOrUpdate(cricketPlayer);
-			transaction.commit();
-			return cricketPlayer;
 		} catch (HibernateException hibernateException) {
 			transaction.rollback();
 			throw new PlayerManagementException(hibernateException.getMessage());

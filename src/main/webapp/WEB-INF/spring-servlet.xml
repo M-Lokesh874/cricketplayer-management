@@ -54,10 +54,12 @@
 			</list>
 		</property>
 	</bean>
+	
 	<bean class="org.springframework.orm.hibernate5.HibernateTemplate"
 		name="hibernateTemplate">
 		<property name="sessionFactory" ref="factory"></property>
 	</bean>
+	
 	<bean
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager"
 		name="transactionManager">

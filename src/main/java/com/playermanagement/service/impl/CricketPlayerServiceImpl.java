@@ -32,23 +32,6 @@ public class CricketPlayerServiceImpl implements CricketPlayerService {
 	public CricketPlayerDao cricketPlayerDao;
 
 	/**
-	 * {@inheritDoc}
-	 * 
-	 * @param name        - validated name from the controller
-	 * @param country     - validated country name from the controller
-	 * @param gender      - gender from the controller
-	 * @param dateOfBirth - validated date of birth from the controller
-	 * @param email       - validated email from the controller
-	 * @return cricketPlayer.
-	 */
-	public CricketPlayer createPlayer(String name, String country, Gender gender, Date dateOfBirth, String email)
-			throws PlayerManagementException {
-		CricketPlayer cricketPlayer = new CricketPlayer(name, country, gender, dateOfBirth, email);
-		cricketPlayer.setPlayerCode(generateId());
-		return cricketPlayerDao.insertPlayer(cricketPlayer);
-	}
-
-	/**
 	 * <p>
 	 * This method is used to generate the id by converting int to string.
 	 * </p>
@@ -121,16 +104,6 @@ public class CricketPlayerServiceImpl implements CricketPlayerService {
 		return cricketPlayerDao.retrievePlayerAndTeams(playerId);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @param playerIds - player id given by user
-	 * @return - cricketePlayer
-	 */
-	public List<CricketPlayer> getPlayersGivenIds(StringBuffer playerIds) throws PlayerManagementException {
-		return cricketPlayerDao.getPlayersGivenIds(playerIds);
-	}
-
 	public int getCount() {
 		return cricketPlayerDao.getCount();
 	}
@@ -138,43 +111,6 @@ public class CricketPlayerServiceImpl implements CricketPlayerService {
 	public boolean assignTeam(CricketPlayer cricketPlayer, List<CricketTeam> cricketTeams) throws PlayerManagementException {
 		cricketPlayer.setCricketTeam(cricketTeams);
 		return cricketPlayerDao.assignTeam(cricketPlayer);
-	}
-
-	/**
-	 * <p>
-	 * This method is used to update particular player detail.
-	 * </p>
-	 *
-	 * @param playerId - player id given by user.
-	 * @param value    - value given by user to update.
-	 * @param choice   - choice to update particular detail.
-	 */
-
-	public CricketPlayer updatePlayerById(int playerId, String value, int choice) throws PlayerManagementException {
-		CricketPlayer cricketPlayer = getPlayerById(playerId);
-		switch(choice) {
-			case 1:
-				cricketPlayer.setName(value);
-				break;
-
-			case 2:
-				Date dob = DateUtil.convertStringToDate(value);
-				cricketPlayer.setDateOfBirth(dob);
-				break;
-
-			case 3:
-				cricketPlayer.setCountry(value);
-				break;
-
-			case 4:
-				cricketPlayer.setEmail(value);
-				break;
-
-			case 5:
-				cricketPlayer.setGender(Gender.valueOf(value));
-				break;
-		}
-		return cricketPlayerDao.updatePlayer(cricketPlayer);
 	}
 
 	@Override

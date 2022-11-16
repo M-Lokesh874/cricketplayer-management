@@ -25,6 +25,29 @@ public class CricketPlayerSpringController {
 	@Autowired
 	CricketPlayerService cricketPlayerService;
 
+	@RequestMapping("/createplayer")
+	public String createPlayer(Model model) {
+		model.addAttribute("cricketPlayer", new CricketPlayer());
+		return "createPlayer";
+	}
+
+	@RequestMapping(value = "/create-player", method = RequestMethod.POST)
+	public RedirectView addPlayer(@ModelAttribute CricketPlayer cricketPlayer, Model model) {
+		RedirectView redirectView = new RedirectView();
+		try {
+			if (0 != cricketPlayer.getId()) {
+				cricketPlayer.setCreatedAt(cricketPlayerService.getPlayerById(cricketPlayer.getId()).getCreatedAt());
+				cricketPlayerService.updatePlayerById(cricketPlayer);
+			} else {
+				cricketPlayerService.createPlayer(cricketPlayer);
+			}
+			redirectView.setUrl("displayplayers");
+		} catch (PlayerManagementException e) {
+			e.printStackTrace();
+		}
+		return redirectView;
+	}
+
 	@RequestMapping("/displayplayers")
 	public String getPlayers(Model model) {
 		try {
@@ -36,60 +59,40 @@ public class CricketPlayerSpringController {
 		return "displayPlayers";
 	}
 
-	@RequestMapping("/getplayer")
-	public String getPlayerById(HttpServletRequest request, @RequestParam(value = "id", required = false) Integer id,
+	@RequestMapping(value = { "/getplayer", "/getplayerbyid" })
+	public String getPlayerByid(HttpServletRequest request, @RequestParam(value = "id", required = false) Integer id,
 			Model model) {
+		String action = request.getServletPath();
+		CricketPlayer cricketPlayer = new CricketPlayer();
 		try {
 			if (null != id) {
-				CricketPlayer cricketPlayer = cricketPlayerService.getPlayerById(id);
-				model.addAttribute("cricketPlayer", cricketPlayer);
+				cricketPlayer = cricketPlayerService.getPlayerById(id);
 			}
+			model.addAttribute("cricketPlayer", cricketPlayer);
 		} catch (PlayerManagementException e) {
 			e.printStackTrace();
 		}
-		return "getPlayer";
+		if (action.equals("/getplayer")) {
+			return "getPlayer";
+		} else
+			return "createPlayer";
 	}
 
-	@RequestMapping("/createplayer")
-	public String createPlayer(Model model) {
-		model.addAttribute("cricketPlayer", new CricketPlayer());
-		return "createPlayer";
-	}
-	
-	@RequestMapping(value = "/create-player", method = RequestMethod.POST)
-	public RedirectView addPlayer(@ModelAttribute CricketPlayer cricketPlayer, Model model) {
-		RedirectView redirectView = new RedirectView();
-	    try {
-			cricketPlayerService.createPlayer(cricketPlayer);
-			redirectView.setUrl("displayplayers");
-		} catch (PlayerManagementException e) {
-			e.printStackTrace();
-		}
-		return redirectView;
-	}
-	
-	@RequestMapping("/updateplayer")
-	public String updatePlayer(@ModelAttribute("cricketPlayer") CricketPlayer cricketPlayer) {
-		try {
-			cricketPlayer = cricketPlayerService.updatePlayerById(cricketPlayer);
-		} catch (PlayerManagementException e) {
-			e.printStackTrace();
-		}
-		return "displayPlayer";
-	}
-	
-	@RequestMapping("/getplayerbyid")
-	public String getPlayer(HttpServletRequest request, @RequestParam(value = "id", required = false) Integer id,
+	@RequestMapping(value = "/delete-player", method = RequestMethod.POST)
+	public String deletePlayer(HttpServletRequest request, @RequestParam(value = "id", required = false) Integer id,
 			Model model) {
-		try {
-			if (null != id) {
-				CricketPlayer cricketPlayer = cricketPlayerService.getPlayerById(id);
-				model.addAttribute("cricketPlayer", cricketPlayer);
+		boolean isDeleted;
+		if (null != id) {
+			try {
+				isDeleted = cricketPlayerService.deletePlayerById(id);
+				if (isDeleted) {
+					model.addAttribute("isDeleted", "Deleted successfully");
+				}
+			} catch (PlayerManagementException e) {
+				e.printStackTrace();
 			}
-		} catch (PlayerManagementException e) {
-			e.printStackTrace();
 		}
-		return "updatePlayer";
+		return "deletePlayer";
 	}
 
 	@RequestMapping("/index")
@@ -97,8 +100,19 @@ public class CricketPlayerSpringController {
 		return "index";
 	}
 
-	@RequestMapping("/cricketPlayer")
+	@RequestMapping("/cricketplayer")
 	public String cricketPlayer() {
 		return "cricketPlayer";
 	}
+
+	@RequestMapping("/updateplayer")
+	public String updatePlayer() {
+		return "updatePlayer";
+	}
+
+	@RequestMapping("/deleteplayer")
+	public String deletePlayer() {
+		return "deletePlayer";
+	}
+
 }

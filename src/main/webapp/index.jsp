@@ -9,14 +9,14 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
-<ol>
-	<li><a href="index">
-			<button class="btn btn-success">Home</button>
-	</a></li>
-		<h1>Player Management</h1>
+	<div class="container">
+		<ol>
+			<li><a href="index">
+					<button class="btn btn-success">Home</button>
+			</a></li>
+			<h1>Player Management</h1>
 
-			<li><a href="cricketPlayer">
+			<li><a href="cricketplayer">
 					<div class="button btn-info btn-sm">Cricket player</div>
 			</a></li>
 			<br>

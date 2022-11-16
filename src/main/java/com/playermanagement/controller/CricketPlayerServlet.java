@@ -44,11 +44,7 @@ public class CricketPlayerServlet extends HttpServlet {
 		
         String action = request.getServletPath();
         try {
-            switch (action) {
-                case "/createplayer":
-                    createPlayer(request, response);
-                    break;
-                    
+            switch (action) {                    
 			    case "/displayplayers": 
 			    	displayPlayers(request, response);
 				    break;		 
@@ -143,25 +139,6 @@ public class CricketPlayerServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-	}
-
-	private void createPlayer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter pw = response.getWriter();
-		String name = request.getParameter("name");
-		String country = request.getParameter("country");
-		Gender gender = Gender.valueOf(request.getParameter("gender"));
-		String email = request.getParameter("email");
-		try {
-			Date dateOfBirth = DateUtil.convertStringToDate(request.getParameter("dateofbirth"));
-			CricketPlayer cricketPlayer = cricketPlayerService.createPlayer(name, country, gender, dateOfBirth, email);
-			if(null != cricketPlayer) {
-				pw.println("inserted successfully");
-			} else {
-				pw.println("Error occurred while inserting ");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private void displayPlayers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

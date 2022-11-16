@@ -25,14 +25,12 @@
 		<h1>Update player</h1>
 		<form action="getplayerbyid" method="get">
 			Id:<input type="number" name="id"> <input type="submit"
-				name="submit" value="click here"
-				<div class="button btn-info btn-sm"></div >>
+				name="submit" value="click here">
+			<div class="button btn-info btn-sm"></div>
 		</form>
 	</div>
-	
-	${cricketPlayer }
 
- 	<form:form action="updateplayer" modelAttribute = "cricketPlayer" method="post">
+	<%-- 	<form:form action="updateplayer" modelAttribute = "cricketPlayer" method="post">
 		<%
 		CricketPlayer cricketPlayer = (CricketPlayer) session.getAttribute("cricketplayer");
 		%>
@@ -46,8 +44,7 @@
 			</tr>
 			<tr>
 				<td>Name</td>
-				<td><form:input path ="name"/
-					value=<%=cricketPlayer.getName()%>></td>
+				<td><form:input path ="name"/></td>
 			</tr>
 
 			<tr>
@@ -92,10 +89,10 @@
 			</form:form>
 		<%
 		}
-		%>
-		 
+		%> --%>
 
-<%-- 	<%
+
+	<%-- 	<%
 	if (null != session.getAttribute("cricketPlayer")) {
 	%>
 	<%

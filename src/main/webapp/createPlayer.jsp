@@ -14,48 +14,53 @@
 
 </head>
 <body>
- <ul type="square">
-	<li><a href="index">
-			<button class="btn btn-success">Home</button>
-	</a></li>
-	<li><a href="cricketPlayer">
-			<button class="btn btn-success">Back</button>
-	</a></li>
+	<ul type="square">
+		<li><a href="index">
+				<button class="btn btn-success">Home</button>
+		</a></li>
+		<li><a href="cricketPlayer">
+				<button class="btn btn-success">Back</button>
+		</a></li>
 	</ul>
 	<br>
 
 	<div align="center">
-		<h1>Add new player</h1>
+		<h1>Player</h1>
 
-		<form:form action="create-player" modelAttribute="cricketPlayer" method="post">
+		<form:form action="create-player" modelAttribute="cricketPlayer"
+			method="post">
 			<table class="table bg-info">
+				<form:input type="hidden" path="id" />
+				<form:input type="hidden" path="playerCode" />
+				<%-- <form:input type = "hidden" path ="createdAt"/> --%>
 				<tr>
 					<td>Name</td>
-					<td><form:input  path ="name"/></td>
+					<td><form:input path="name" /></td>
 				</tr>
 
 				<tr>
 					<td>Date of Birth</td>
-					<td><form:input path ="dateOfBirth" placeholder = "dd/mm/yyyy"/></td>
+					<td><form:input path="dateOfBirth" placeholder="dd/mm/yyyy" /></td>
 				</tr>
 
 				<tr>
 					<td>Country</td>
-					<td><form:input path ="country" /></td>
+					<td><form:input path="country" /></td>
 				</tr>
 
 				<tr>
 				<tr>
 					<td>Gender</td>
-					<td><%-- <input type="radio" name="gender" value="FEMALE" id="female"> <label for="female">FEMALE</label>
+					<td>
+						<%-- <input type="radio" name="gender" value="FEMALE" id="female"> <label for="female">FEMALE</label>
 						<input type="radio" name="gender" value="MALE" id="male"> MALE</td> --%>
-						<form:radiobuttons path ="gender" />
+						<form:radiobuttons path="gender" />
 				</tr>
 
 
 				<tr>
 					<td>Email</td>
-					<td><form:input path ="email" /></td>
+					<td><form:input path="email" /></td>
 				</tr>
 
 			</table>
