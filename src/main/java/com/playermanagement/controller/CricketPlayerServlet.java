@@ -29,8 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(urlPatterns={"/CricketPlayerServlet","/deleteplayerbyid", "/searchplayerbyid", "/displayplayersbetweendateofbirth", "/displayplayersbymultipleids",
-		    "/assignteam"})
+@WebServlet(urlPatterns={"/CricketPlayerServlet"})
 public class CricketPlayerServlet extends HttpServlet {
 
 	private final Scanner scanner = new Scanner(System.in);
@@ -193,7 +192,7 @@ public class CricketPlayerServlet extends HttpServlet {
 	
 	private void searchPlayerById(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
-			PrintWriter pw = response.getWriter();
+			response.getWriter();
 			List<CricketPlayer> cricketPlayers = cricketPlayerService.searchPlayerByName(request.getParameter("name"));
 			HttpSession session = request.getSession();
 			session.setAttribute("cricketPlayers", cricketPlayers);

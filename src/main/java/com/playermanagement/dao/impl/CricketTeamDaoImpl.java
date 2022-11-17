@@ -3,6 +3,9 @@ package com.playermanagement.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,10 @@ public class CricketTeamDaoImpl implements CricketTeamDao {
 	
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
+	
+	/*
+	 * @PersistenceContext private EntityManager entityManager;
+	 */
 	
 	public CricketTeam insertTeam(CricketTeam cricketTeam) throws PlayerManagementException {
 		SessionFactory sessionFactory = null;
@@ -65,8 +72,10 @@ public class CricketTeamDaoImpl implements CricketTeamDao {
 	 *
 	 */
 	public CricketTeam getTeamById(int id) throws PlayerManagementException {
+		System.out.println(id);
 	    try {
 			CricketTeam cricketTeam = this.hibernateTemplate.get(CricketTeam.class, id);
+			System.out.println(cricketTeam);
 			return cricketTeam;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());

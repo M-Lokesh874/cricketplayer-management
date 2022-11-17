@@ -9,26 +9,30 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container">
-		<ol>
-			<li><a href="index">
-					<button class="btn btn-success">Home</button>
-			</a></li>
-			<h1>Player Management</h1>
 
-			<li><a href="cricketplayer">
-					<div class="button btn-info btn-sm">Cricket player</div>
-			</a></li>
-			<br>
-			<li><a href="cricketTeams">
-					<div class="button btn-info btn-sm">Cricket teams</div>
-			</a></li>
-			<br>
-			<li><a href="playerStats">
-					<div class="button btn-info btn-sm">Player stats</div>
-			</a></li>
-			<br>
-		</ol>
+
+	<li><a href="index">
+			<button class="btn btn-success">Home</button>
+	</a></li>
+	<div align="center">
+		<h1>Player Management</h1>
 	</div>
+	<ol>
+		<li><a href="cricketplayer">
+				<div class="button btn-info btn-sm">Cricket player</div>
+		</a></li>
+		<br>
+		<li><a href="cricketteam">
+				<div class="button btn-info btn-sm">Cricket teams</div>
+		</a></li>
+		<br>
+		<li><a href="playerStats">
+				<div class="button btn-info btn-sm">Player stats</div>
+		</a></li>
+		<br>
+	</ol>
+
+
+
 </body>
 </html>

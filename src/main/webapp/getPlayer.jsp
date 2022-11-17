@@ -1,6 +1,7 @@
 <%@page import="com.playermanagement.model.CricketPlayer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
 
 <!DOCTYPE html>
@@ -14,13 +15,13 @@
 </head>
 <body>
 
-	<li><a href="home">
+	<li><a href="index">
 			<button class="btn btn-success">Home</button>
 	</a></li>
-	<li><a href="cricketPlayer">
+	<br>
+	<li><a href="cricketplayer">
 			<button class="btn btn-success">Back</button>
 	</a></li>
-	<br>
 
 	<div align="center">
 		<h1>Player</h1>
@@ -40,7 +41,7 @@
 	<table class="table bg-info">
 		<tr>
 			<td>Id :</td>
-			<td><%=cricketPlayer.getId()%></td>
+			<td>${cricketPlayer.getId()}</td>
 		</tr>
 		<tr>
 			<td>Player Code :</td>

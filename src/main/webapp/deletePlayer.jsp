@@ -12,9 +12,10 @@
 
 </head>
 <body>
-	<li><a href="home">
+	<li><a href="index">
 			<button class="btn btn-success">Home</button>
 	</a></li>
+	<br>
 	<li><a href="cricketplayer">
 			<button class="btn btn-success">Back</button>
 	</a></li>

@@ -52,7 +52,11 @@ public class CricketTeamSpringController {
 		return "getTeam";
 	}
 	
-	@RequestMapping("/cricketTeams")
+	/*
+	 * @RequestMapping("/index") public String index() { return "/index"; }
+	 */
+	
+	@RequestMapping("/cricketteam")
 	public String cricketTeam() {
 		return "cricketTeams";
 	}

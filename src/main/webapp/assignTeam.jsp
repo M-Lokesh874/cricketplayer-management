@@ -2,12 +2,14 @@
 <%@page import="com.playermanagement.model.CricketPlayer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <%
-CricketPlayer cricketPlayer = (CricketPlayer) session.getAttribute("cricketPlayer");
+CricketPlayer cricketPlayer = (CricketPlayer) request.getAttribute("cricketPlayer");
 %>
 <%
-CricketTeam cricketTeam = (CricketTeam) session.getAttribute("cricketTeam");
+CricketTeam cricketTeam = (CricketTeam) request.getAttribute("cricketTeam");
 %>
 <html>
 <head>
@@ -19,18 +21,18 @@ CricketTeam cricketTeam = (CricketTeam) session.getAttribute("cricketTeam");
 </head>
 <body>
 
-	<li><a href="home.jsp">
+	<li><a href="index">
 			<button class="btn btn-success">Home</button>
 	</a></li>
 	<br>
-	<li><a href="cricketPlayer.jsp">
+	<li><a href="cricketplayer">
 			<button class="btn btn-success">Back</button>
 	</a></li>
 	<br>
 
 	<div align="center">
 		<h1>Assign team</h1>
-		<form action="assignteam" method="post">
+		<form action="assign-team" method="post">
 
 			Player id:<input type="number" name="playerid"> Team id :<input
 				type="number" name="teamid"> <input type="submit"

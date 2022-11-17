@@ -18,7 +18,7 @@
 		<li><a href="index">
 				<button class="btn btn-success">Home</button>
 		</a></li>
-		<li><a href="cricketPlayer">
+		<li><a href="cricketplayer">
 				<button class="btn btn-success">Back</button>
 		</a></li>
 	</ul>
@@ -51,16 +51,18 @@
 				<tr>
 				<tr>
 					<td>Gender</td>
-					<td>
-						<%-- <input type="radio" name="gender" value="FEMALE" id="female"> <label for="female">FEMALE</label>
-						<input type="radio" name="gender" value="MALE" id="male"> MALE</td> --%>
-						<form:radiobuttons path="gender" />
+					<td><form:radiobuttons path="gender" /></td>
 				</tr>
 
 
 				<tr>
 					<td>Email</td>
 					<td><form:input path="email" /></td>
+				</tr>
+				
+				<tr>
+					<td>Delete</td>
+					<td><form:input path="deleted" /></td>
 				</tr>
 
 			</table>

@@ -18,7 +18,7 @@
 			<button class="btn btn-success">Home</button>
 	</a></li>
 	<br>
-	<li><a href="cricketPlayer">
+	<li><a href="cricketplayer">
 			<button class="btn btn-success">Back</button>
 	</a></li>
 	<br>

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import com.playermanagement.dao.CricketPlayerDao;
 import com.playermanagement.model.CricketPlayer;
@@ -21,6 +22,9 @@ import com.playermanagement.model.CricketTeam;
 import com.playermanagement.util.connection.HibernateConnection;
 import com.playermanagement.util.exception.PlayerManagementException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -30,6 +34,10 @@ public class CricketPlayerDaoImpl implements CricketPlayerDao {
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
+
+	/*
+	 * @PersistenceContext private EntityManager entityManager;
+	 */
 
 	/**
 	 * {@inheritDoc}
@@ -89,7 +97,6 @@ public class CricketPlayerDaoImpl implements CricketPlayerDao {
 			throw new PlayerManagementException(hibernateException.getMessage());
 		}
 	}
-	
 
 	/**
 	 * {@inheritDoc}

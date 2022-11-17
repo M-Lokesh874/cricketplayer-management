@@ -13,14 +13,15 @@
 
 </head>
 <body>
-	<li><a href="home">
+	<li><a href="index">
 			<button class="btn btn-success">Home</button>
 	</a></li>
-	<li><a href="cricketTeams">
+	<li><a href="cricketteam">
 			<button class="btn btn-success">Back</button>
 	</a></li>
 	<br>
 
+${cricketTeam }
 	<div align="center">
 		<h1>Display team</h1>
 

@@ -21,8 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = {"/CricketTeamServlet", "/createteam", "/displayteambyid", "/deleteteambyid", "/updateteambyid",
-		"/assigncaptain", "/assignwicketkeeper"})
+@WebServlet(urlPatterns = {"/CricketTeamServlet"})
 public class CricketTeamServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public CricketTeamService cricketTeamService;
@@ -37,10 +36,6 @@ public class CricketTeamServlet extends HttpServlet {
         	switch(action) {
         	    case "/createteam":
         	    	createTeam(request, response);
-        	    	break;
-        	    	
-        	    case "/displayteambyid" :
-        	    	displayTeamById(request, response);
         	    	break;
         	    	
         	    case "/deleteteambyid" :
@@ -116,10 +111,6 @@ public class CricketTeamServlet extends HttpServlet {
 		try {
         	switch(action) {
         	    	
-        	    case "/getteambyid" :
-        	    	getTeamById(request, response);
-        	    	break;
-        	    	
         	    case "/displayteams" :
         	    	displayTeams(request, response);
         	    	break;
@@ -127,19 +118,6 @@ public class CricketTeamServlet extends HttpServlet {
 			
 		} catch (HibernateException ex) {
 			System.out.println(ex);
-		}
-	}
-
-	private void getTeamById(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		try {
-			CricketTeam cricketTeam = cricketTeamService.getTeamById(Integer.parseInt(request.getParameter("id")));
-			HttpSession session = request.getSession();	
-			session.setAttribute("cricketteam", cricketTeam);
-			response.sendRedirect("updateTeam.jsp");
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (PlayerManagementException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -166,19 +144,6 @@ public class CricketTeamServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("found",found);
 			response.sendRedirect("deleteTeam.jsp");
-		} catch (PlayerManagementException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void displayTeamById(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		try {
-			CricketTeam cricketTeam = cricketTeamService.getTeamById(Integer.parseInt(request.getParameter("id")));
-			HttpSession session = request.getSession();	
-			session.setAttribute("cricketTeam", cricketTeam);
-			response.sendRedirect("getTeam.jsp");
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
 		} catch (PlayerManagementException e) {
 			e.printStackTrace();
 		}
