@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,32 +13,24 @@
 </head>
 <body>
 
-	<li><a href="home.jsp">
+	<li><a href="index">
 			<button class="btn btn-success">Home</button>
+	</a></li>
+		<br>
+	<li><a href="cricketteams">
+			<button class="btn btn-success">Back</button>
 	</a></li>
 	<br>
 	<div align="center">
 		<h1>Delete team</h1>
-		<form action="deleteteambyid" method="post">
+		<form action="delete-team" method="post">
 			Id:<input type="number" name="id"> <input type="submit"
 				name="submit" value="click here"
 				<div class="button btn-info btn-sm"></div >>
 
 		</form>
 	</div>
-
-	<%
-	if (null != session.getAttribute("found")) {
-	%>
-	<%
-	boolean found = (boolean) session.getAttribute("found");
-	%>
-	<%
-	if (found)
-	%>
-	deleted successfully
-	<%
-	}
-	%>
+	${isDeleted }
+	
 </body>
 </html>

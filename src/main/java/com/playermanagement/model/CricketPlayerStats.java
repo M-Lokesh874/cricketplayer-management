@@ -5,10 +5,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
+
 import com.playermanagement.model.CricketPlayerStats;
 
 @Entity
 @Table(name = "stats")
+@SQLDelete(sql = "update stats set is_deleted = 1 where id = ?", check=ResultCheckStyle.COUNT)
 public class CricketPlayerStats extends BaseModel {
 
 	private int noOfMatch;

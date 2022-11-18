@@ -6,6 +6,10 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,28 +21,25 @@ import com.playermanagement.model.CricketPlayerStats;
 import com.playermanagement.util.connection.HibernateConnection;
 import com.playermanagement.util.exception.PlayerManagementException;
 
+@Component
 public class CricketPlayerStatsDaoImpl implements CricketPlayerStatsDao {
 
+	@Autowired
+	private HibernateTemplate hibernateTemplate;
+	
 	/**
 	 * {@inheritdoc}
 	 *
 	 * @return cricketPlayerStats.
 	 */
+	@Transactional
 	public CricketPlayerStats insertStats(CricketPlayerStats cricketPlayerStats) throws PlayerManagementException {
-		SessionFactory sessionFactory = null;
-		Session session = null;
 		try {
-			sessionFactory = HibernateConnection.getSessionFactory();
-			session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.save(cricketPlayerStats);
-			tx.commit();
-			return cricketPlayerStats;
-		} catch (HibernateException hibernateException) {
+			this.hibernateTemplate.save(cricketPlayerStats);
+		}catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
-		} finally {
-			session.close();
 		}
+		return cricketPlayerStats;
 	}
 
 	/**
@@ -47,24 +48,12 @@ public class CricketPlayerStatsDaoImpl implements CricketPlayerStatsDao {
 	 * @return cricketPlayer.
 	 */
 	public CricketPlayerStats displayStatsById(int statsId) throws PlayerManagementException {
-		CricketPlayerStats cricketPlayerStats = new CricketPlayerStats();
-		SessionFactory sessionFactory = null;
-		Session session = null;
 		try {
-			sessionFactory = HibernateConnection.getSessionFactory();
-			session = sessionFactory.openSession();
-			Criteria criteria = session.createCriteria(CricketPlayerStats.class);
-			criteria.add(Restrictions.eq("id", statsId));
-			cricketPlayerStats = (CricketPlayerStats) criteria.uniqueResult();
-			CricketPlayer cricketPlayer = new CricketPlayer();
-			cricketPlayer = cricketPlayerStats.getCricketPlayer();
-			cricketPlayerStats.setCricketPlayer(cricketPlayer);
+			CricketPlayerStats cricketPlayerStats = this.hibernateTemplate.get(CricketPlayerStats.class, statsId);
 			return cricketPlayerStats;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	/**

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +22,11 @@
 		<br>
 		<table>
 			<tr>
-				<td><a href="createStats.jsp"><button type="button"
+				<td><a href="getplayerforassign"><button type="button"
 							class="btn-info btn-sm">create stats</button></a><br></td>
 			</tr>
 			<tr>
-				<td><a href="getStats.jsp"><button type="button"
+				<td><a href="getstats"><button type="button"
 							class="btn-info btn-sm">display stats by id</button></a><br></td>
 			</tr>
 			<tr>

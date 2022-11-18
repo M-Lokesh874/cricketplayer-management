@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.playermanagement.model.CricketTeam"%>
 <%@page import="com.playermanagement.model.CricketPlayer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,10 +7,25 @@
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <%
+int id = 0;
+%>
+<%
 CricketPlayer cricketPlayer = (CricketPlayer) request.getAttribute("cricketPlayer");
 %>
 <%
+List<CricketTeam> cricketTeams = (List<CricketTeam>) request.getAttribute("cricketTeams");
+%>
+<%
 CricketTeam cricketTeam = (CricketTeam) request.getAttribute("cricketTeam");
+%>
+<%
+if (null != cricketPlayer) {
+%>
+<%
+id = cricketPlayer.getId();
+%>
+<%
+}
 %>
 <html>
 <head>
@@ -34,9 +50,9 @@ CricketTeam cricketTeam = (CricketTeam) request.getAttribute("cricketTeam");
 		<h1>Assign team</h1>
 		<form action="assign-team" method="post">
 
-			Player id:<input type="number" name="playerid"> Team id :<input
-				type="number" name="teamid"> <input type="submit"
-				name="submit" value="assign"
+			Player id:<input type="number" name="playerid">
+			<!-- Team id :<input type="number" name="teamid"> -->
+			<input type="submit" name="submit" value="assign"
 				<div class = "button btn-info btn-sm"</div>>
 		</form>
 
@@ -78,10 +94,41 @@ CricketTeam cricketTeam = (CricketTeam) request.getAttribute("cricketTeam");
 		%>
 
 		<%
-		if (null != cricketTeam) {
+		if (null != cricketTeams) {
 		%>
+
+		<form action="after-assign" method="post">
+
+			Player id:<input name="playerid" value="<%=id%>" readonly>
+			Team id :<input type="number" name="teamid"> <input
+				type="submit" name="submit" value="assign"
+				<div class = "button btn-info btn-sm"</div>>
+		</form>
 		Cricket team
+		<%
+		for (CricketTeam team : cricketTeams) {
+		%>
 		<table class="table bg-info">
+
+			<tr>
+				<td>Id :</td>
+				<td><%=team.getId()%></td>
+			</tr>
+			<tr>
+				<td>Name :</td>
+				<td><%=team.getName()%></td>
+			</tr>
+		</table>
+		<%
+		}
+		}
+		%>
+
+		<%
+		if (null != cricketTeams && null != cricketTeam) {
+		%>
+		<table class="table bg-info">
+
 
 			<tr>
 				<td>Id :</td>
@@ -108,26 +155,7 @@ CricketTeam cricketTeam = (CricketTeam) request.getAttribute("cricketTeam");
 		<%
 		}
 		%>
-		<div align="center">
-			<%
-			if (null != session.getAttribute("found")) {
-			%>
-			<%
-			boolean found = (boolean) session.getAttribute("found");
-			%>
-			<%
-			if (found) {
-			%>
-			Assigned succesfully
-			<%
-			} else {
-			%>
-			not assigned successfully
-			<%
-			}
-			}
-			%>
-		</div>
+		<div align="center">${status}</div>
 	</div>
 </body>
 </html>

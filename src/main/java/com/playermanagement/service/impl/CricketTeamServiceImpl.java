@@ -35,69 +35,12 @@ public class CricketTeamServiceImpl implements CricketTeamService {
 		return cricketTeamDao.retrieveTeamAndPlayers(cricketTeam, teamId);
 	}
 
-	public CricketTeam createTeam(String name, int totalMatch, int won, int lost)
-			throws PlayerManagementException {
-		CricketTeam cricketTeam = new CricketTeam(name, totalMatch, won, lost);
-		return cricketTeamDao.insertTeam(cricketTeam);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @param id - team id given by user
-	 * @return true if removed or false.
-	 */
 	public boolean deleteCricketTeamById(int id) throws PlayerManagementException {
 		return cricketTeamDao.deleteCricketTeamById(id);
 	}
 
-	@Override
-	/*public boolean assignPlayer(CricketTeam cricketTeam, int playerId) throws PlayerManagementException {
-		return cricketTeamDao.assignPlayer(cricketTeam, playerId);
-	}*/
-
 	public CricketTeam getTeamById(int id) throws PlayerManagementException {
 		return cricketTeamDao.getTeamById(id);
-	}
-
-	@Override
-	public CricketTeam updateTeamById(int teamId, int value, int choice) throws PlayerManagementException {
-		CricketTeam cricketTeam = getTeamById(teamId);
-		switch (choice) {
-		/*case 2:
-			cricketTeam.setCaptainId(value);
-			break;
-
-		case 3:
-			cricketTeam.setWicketKeeperId(value);
-			break;*/
-			
-		case 4:
-			cricketTeam.setWon(value);
-			break;
-
-		case 5:
-			cricketTeam.setLost(value);
-			break;
-			
-		case 6:	
-			cricketTeam.setTotalMatch(value);
-			break;
-
-		}
-		return cricketTeamDao.updateTeamById(cricketTeam);
-	}
-	
-	public CricketTeam updateTeamById(int teamId, String value, int choice) throws PlayerManagementException {
-		CricketTeam cricketTeam = getTeamById(teamId);
-		switch (choice) {
-		case 1:
-			cricketTeam.setName(value);
-			break;
-
-
-		}
-		return cricketTeamDao.updateTeamById(cricketTeam);
 	}
 
 	@Override
@@ -122,6 +65,11 @@ public class CricketTeamServiceImpl implements CricketTeamService {
 	@Override
 	public CricketTeam updateTeamById(CricketTeam cricketTeam) throws PlayerManagementException {
 		return cricketTeamDao.updateTeamById(cricketTeam);
+	}
+
+	@Override
+	public CricketTeam createTeam(CricketTeam cricketTeam) throws PlayerManagementException {
+		return cricketTeamDao.insertTeam(cricketTeam);	
 	}
 
 

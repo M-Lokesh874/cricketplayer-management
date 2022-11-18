@@ -41,10 +41,6 @@ public class CricketPlayerStatsServlet extends HttpServlet {
         	    	createStats(request, response);
         	    	break;
         	    	
-        	    case "/displaystatsbyid" :
-        	    	displayStatsById(request, response);
-        	    	break;
-        	    	
         	    case "/deletestatsbyid" :
         	    	deleteStatsById(request, response);
         	    	break;
@@ -158,20 +154,6 @@ public class CricketPlayerStatsServlet extends HttpServlet {
 		}
 	}
 	
-	private void displayStatsById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			PrintWriter pw = response.getWriter();
-			CricketPlayerStats cricketPlayerStats = cricketPlayerStatsService.displayStatsById(Integer.parseInt(request.getParameter("id")));
-			HttpSession session = request.getSession();	
-			session.setAttribute("cricketPlayerStats", cricketPlayerStats);
-			response.sendRedirect("getStats.jsp");	
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (PlayerManagementException e) {
-			e.printStackTrace();
-		}
-		
-	}
 	
 	public double getBattingAverage(int noOfMatch, int totalRun) {
 		while (true) {

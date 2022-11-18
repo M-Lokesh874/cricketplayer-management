@@ -19,26 +19,10 @@ public interface CricketTeamService {
 	public List<CricketTeam> getTeams() throws PlayerManagementException;
 
 	public CricketTeam getTeamAndPlayers(CricketTeam cricketTeam, int teamId) throws PlayerManagementException;
-
-	public CricketTeam createTeam(String name, int totalMatch, int won, int lost)
-			throws PlayerManagementException;
-
-	/**
-	 * <p>
-	 * This method is used to delete particular player stats detail.
-	 * </p>
-	 *
-	 * @param id - team id given by user
-	 */
+	
 	public boolean deleteCricketTeamById(int id) throws PlayerManagementException;
 
-	//public boolean assignPlayer(CricketTeam cricketTeam, int playerId) throws PlayerManagementException;
-
 	public CricketTeam getTeamById(int id) throws PlayerManagementException;
-
-	public CricketTeam updateTeamById(int teamId, int cricketTeam, int choice) throws PlayerManagementException;
-	
-	public CricketTeam updateTeamById(int teamId, String value, int choice) throws PlayerManagementException;
 	
 	public CricketTeam updateTeamById(CricketTeam cricketTeam) throws PlayerManagementException;
 
@@ -47,5 +31,7 @@ public interface CricketTeamService {
 	public boolean assignCaptain(CricketTeam cricketTeam, CricketPlayer cricketPlayer) throws PlayerManagementException;
 
 	public boolean assignWicketKeeper(CricketTeam cricketTeam, CricketPlayer cricketPlayer) throws PlayerManagementException;
+
+	public CricketTeam createTeam(CricketTeam cricketTeam) throws PlayerManagementException;
 
 }

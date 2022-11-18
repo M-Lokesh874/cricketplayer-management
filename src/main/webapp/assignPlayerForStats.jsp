@@ -113,25 +113,5 @@ CricketPlayer cricketPlayer = (CricketPlayer) session.getAttribute("cricketPlaye
 		}
 		%>
 	</div>
-
-	<%
-	if (null != session.getAttribute("found")) {
-	%>
-	<%
-	boolean found = (boolean) session.getAttribute("found");
-	%>
-	<%
-	if (found) {
-	%>
-	Assigned succesfully
-	<%
-	} else {
-	%>
-	not assigned successfully
-	<%
-	}
-	}
-	%>
-
 </body>
 </html>

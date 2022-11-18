@@ -30,19 +30,6 @@
 	</div>
 
 	${isDeleted }
-	<%
-	if (null != session.getAttribute("isDeleted")) {
-	%>
-	<%
-	boolean isDeleted = (boolean) session.getAttribute("isDeleted");
-	%>
-	<%
-	if (isDeleted)
-	%>
-	deleted successfully
-	<%
-	}
-	%>
 
 </body>
 </html>

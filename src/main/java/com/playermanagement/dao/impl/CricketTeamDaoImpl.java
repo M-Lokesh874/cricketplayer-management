@@ -11,6 +11,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -27,44 +28,36 @@ public class CricketTeamDaoImpl implements CricketTeamDao {
 	 * {@inheritDoc}
 	 *
 	 */
-	
+
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
-	
+
 	/*
 	 * @PersistenceContext private EntityManager entityManager;
 	 */
-	
+	@Transactional
 	public CricketTeam insertTeam(CricketTeam cricketTeam) throws PlayerManagementException {
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		Transaction transaction = null; 
 		try {
-			sessionFactory = HibernateConnection.getSessionFactory();
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.save(cricketTeam);
-			transaction.commit();
+			this.hibernateTemplate.save(cricketTeam);
 			return cricketTeam;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
-		} finally {
-			session.close();
 		}
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * @throws PlayerManagementException 
+	 * 
+	 * @throws PlayerManagementException
 	 *
 	 */
 	public List<CricketTeam> retrieveTeams() throws PlayerManagementException {
-        try {
-        	List<CricketTeam> cricketTeams = this.hibernateTemplate.loadAll(CricketTeam.class);
-        	return cricketTeams;
+		try {
+			List<CricketTeam> cricketTeams = this.hibernateTemplate.loadAll(CricketTeam.class);
+			return cricketTeams;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
-		} 
+		}
 	}
 
 	/**
@@ -73,10 +66,23 @@ public class CricketTeamDaoImpl implements CricketTeamDao {
 	 */
 	public CricketTeam getTeamById(int id) throws PlayerManagementException {
 		System.out.println(id);
-	    try {
+		try {
 			CricketTeam cricketTeam = this.hibernateTemplate.get(CricketTeam.class, id);
-			System.out.println(cricketTeam);
 			return cricketTeam;
+		} catch (HibernateException hibernateException) {
+			throw new PlayerManagementException(hibernateException.getMessage());
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Transactional
+	public boolean deleteCricketTeamById(int id) throws PlayerManagementException {
+		try {
+			CricketTeam cricketTeam = this.hibernateTemplate.load(CricketTeam.class, id);
+			this.hibernateTemplate.delete(cricketTeam);
+			return true;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
 		}
@@ -99,30 +105,6 @@ public class CricketTeamDaoImpl implements CricketTeamDao {
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
 
-		} finally {
-			session.close();
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public boolean deleteCricketTeamById(int id) throws PlayerManagementException {
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		Transaction transaction = null;
-		try {
-			sessionFactory = HibernateConnection.getSessionFactory();
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			String qryString = "update CricketTeam set deleted = 1 where id = :id ";
-			Query query = session.createQuery(qryString);
-			query.setParameter("id", id);
-			int count = query.executeUpdate();
-			transaction.commit();
-			return count == 1;
-		} catch (HibernateException hibernateException) {
-			throw new PlayerManagementException(hibernateException.getMessage());
 		} finally {
 			session.close();
 		}
@@ -170,7 +152,7 @@ public class CricketTeamDaoImpl implements CricketTeamDao {
 			session.close();
 		}
 	}
-	
+
 	@Override
 	public boolean assignCaptain(CricketTeam cricketTeam) throws PlayerManagementException {
 		SessionFactory sessionFactory = null;

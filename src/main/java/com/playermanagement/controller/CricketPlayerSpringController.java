@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +40,9 @@ public class CricketPlayerSpringController {
 		RedirectView redirectView = new RedirectView();
 		try {
 			if (0 != cricketPlayer.getId()) {
-				cricketPlayer.setCreatedAt(cricketPlayerService.getPlayerById(cricketPlayer.getId()).getCreatedAt());
+				CricketPlayer player = cricketPlayerService.getPlayerById(cricketPlayer.getId());
+				cricketPlayer.setCreatedAt(player.getCreatedAt());
+				cricketPlayer.setCricketTeam(player.getCricketTeam());
 				cricketPlayerService.updatePlayerById(cricketPlayer);
 			} else {
 				cricketPlayerService.createPlayer(cricketPlayer);
@@ -114,19 +117,32 @@ public class CricketPlayerSpringController {
 		return "searchPlayer";
 	}
 
-	@RequestMapping(value = "/assign-team", method = RequestMethod.POST)
+	@PostMapping(value = "/after-assign")
 	public String assignTeam(@RequestParam(value = "playerid", required = false) Integer playerid,
 			@RequestParam(value = "teamid", required = false) Integer teamid, Model model) {
 		try {
-			System.out.println(playerid);
-			System.out.println(teamid);
 			if (null != playerid && null != teamid) {
 				CricketPlayer cricketPlayer = cricketPlayerService.getPlayerById(playerid);
 				List<CricketTeam> cricketTeams = cricketTeamService.getTeams();
 				cricketTeams.get(teamid - 1);
-				System.out.println(cricketPlayer);
-				System.out.println(cricketTeams);
 				cricketPlayerService.assignTeam(cricketPlayer, cricketTeams);
+				model.addAttribute("cricketPlayer", cricketPlayer);
+				model.addAttribute("cricketTeams", cricketTeams);
+				model.addAttribute("status", "Assigned successfully");
+			}
+		} catch (PlayerManagementException e) {
+			e.printStackTrace();
+		}
+		return "assignTeam";
+	}
+
+	@PostMapping(value = "/assign-team")
+	public String assignTeam(@RequestParam(value = "playerid", required = false) Integer playerid, Model model) {
+		try {
+			System.out.println(playerid);
+			if (null != playerid) {
+				CricketPlayer cricketPlayer = cricketPlayerService.getPlayerById(playerid);
+				List<CricketTeam> cricketTeams = cricketTeamService.getTeams();
 				model.addAttribute("cricketPlayer", cricketPlayer);
 				model.addAttribute("cricketTeams", cricketTeams);
 			}

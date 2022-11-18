@@ -2,9 +2,11 @@
 <%@page import="com.playermanagement.model.CricketPlayerStats"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <%
-CricketPlayerStats cricketPlayerStats = (CricketPlayerStats) session.getAttribute("cricketPlayerStats");
+CricketPlayerStats cricketPlayerStats = (CricketPlayerStats) request.getAttribute("cricketPlayerStats");
 %>
 
 <html>
@@ -17,13 +19,15 @@ CricketPlayerStats cricketPlayerStats = (CricketPlayerStats) session.getAttribut
 </head>
 <body>
 
-	<li><a href="home.jsp">
+	<li><a href="index">
 			<button class="btn btn-success">Home</button>
 	</a></li>
 	<br>
 	<div align="center">
-		<h1>Display stats by id</h1>
-		<form action="displaystatsbyid" method="post">
+
+		<h1>Display stats</h1>
+
+		<form action="getstats" method="get">
 			Id:<input type="number" name="id"> <input type="submit"
 				name="submit" value="display here"
 				<div class="button btn-info btn-sm"></div >>
@@ -31,84 +35,46 @@ CricketPlayerStats cricketPlayerStats = (CricketPlayerStats) session.getAttribut
 		</form>
 	</div>
 
-
-	<%
-	if (null != cricketPlayerStats) {
-	%>
-	Stats Of Cricket Player
-	<table class="table bg-info">
-
-		<tr>
-			<td>Id :</td>
-			<td><%=cricketPlayerStats.getId()%></td>
-		</tr>
-		<tr>
-			<td>No of match :</td>
-			<td><%=cricketPlayerStats.getNoOfMatch()%></td>
-		</tr>
-		<tr>
-			<td>Total run :</td>
-			<td><%=cricketPlayerStats.getTotalRun()%></td>
-		</tr>
-		<tr>
-			<td>Top score :</td>
-			<td><%=cricketPlayerStats.getTopScore()%></td>
-		</tr>
-		<tr>
-			<td>No of balls faced :</td>
-			<td><%=cricketPlayerStats.getNoOfBallsFaced()%></td>
-		</tr>
-		<tr>
-			<td>Batting average :</td>
-			<td><%=cricketPlayerStats.getBattingAverage()%></td>
-		</tr>
-		<tr>
-			<td>Strike rate :</td>
-			<td><%=cricketPlayerStats.getStrikeRate()%></td>
-		</tr>
-	</table>
-
-	<%
-	CricketPlayer cricketPlayer = cricketPlayerStats.getCricketPlayer();
-	%>
-
-
-	<table class="table bg-info">
+	<div align="center">
 		<%
-		if (null != cricketPlayer) {
+		if (null != cricketPlayerStats) {
 		%>
-		Details of Cricket Player
-		<tr>
-			<td>Id :</td>
-			<td><%=cricketPlayer.getId()%></td>
-		</tr>
-		<tr>
-			<td>Player Code :</td>
-			<td><%=cricketPlayer.getPlayerCode()%></td>
-		</tr>
-		<tr>
-			<td>Name :</td>
-			<td><%=cricketPlayer.getName()%></td>
-		</tr>
-		<tr>
-			<td>Date Of birth :</td>
-			<td><%=cricketPlayer.getDateOfBirth()%></td>
-		</tr>
-		<tr>
-			<td>Country :</td>
-			<td><%=cricketPlayer.getCountry()%></td>
-		</tr>
-		<tr>
-			<td>Email :</td>
-			<td><%=cricketPlayer.getEmail()%></td>
-		</tr>
-	</table>
-	<%
-	}
-	%>
-	<%
-	}
-	%>
+		Stats Of Cricket Player
+		<table class="table bg-info">
 
+			<tr>
+				<td>Id :</td>
+				<td><%=cricketPlayerStats.getId()%></td>
+			</tr>
+			<tr>
+				<td>No of match :</td>
+				<td><%=cricketPlayerStats.getNoOfMatch()%></td>
+			</tr>
+			<tr>
+				<td>Total run :</td>
+				<td><%=cricketPlayerStats.getTotalRun()%></td>
+			</tr>
+			<tr>
+				<td>Top score :</td>
+				<td><%=cricketPlayerStats.getTopScore()%></td>
+			</tr>
+			<tr>
+				<td>No of balls faced :</td>
+				<td><%=cricketPlayerStats.getNoOfBallsFaced()%></td>
+			</tr>
+			<tr>
+				<td>Batting average :</td>
+				<td><%=cricketPlayerStats.getBattingAverage()%></td>
+			</tr>
+			<tr>
+				<td>Strike rate :</td>
+				<td><%=cricketPlayerStats.getStrikeRate()%></td>
+			</tr>
+		</table>
+
+		<%
+		}
+		%>
+	</div>
 </body>
 </html>

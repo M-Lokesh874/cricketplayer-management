@@ -51,4 +51,6 @@ public interface CricketPlayerStatsService {
 
 	public boolean assignPlayer(CricketPlayerStats cricketPlayerStats, CricketPlayer cricketPlayer)
 			throws PlayerManagementException;
+
+	public CricketPlayerStats createStats(CricketPlayerStats cricketPlayerStats, CricketPlayer cricketPlayer) throws PlayerManagementException;
 }

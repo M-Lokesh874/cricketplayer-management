@@ -34,9 +34,6 @@ public class CricketTeamServlet extends HttpServlet {
 		String action = request.getServletPath();
         try {
         	switch(action) {
-        	    case "/createteam":
-        	    	createTeam(request, response);
-        	    	break;
         	    	
         	    case "/deleteteambyid" :
         	    	deleteTeamById(request, response);
@@ -160,23 +157,5 @@ public class CricketTeamServlet extends HttpServlet {
 		}
 	}
 
-	private void createTeam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter pw = response.getWriter();
-		String name = request.getParameter("name");
-		int totalMatch = Integer.parseInt(request.getParameter("totalmatch"));
-		int won = Integer.parseInt(request.getParameter("won"));
-		int lost =  Integer.parseInt(request.getParameter("lost"));
-		try {
-			CricketTeam cricketTeam = cricketTeamService.createTeam(name, totalMatch, won, lost);
-			if(null != cricketTeam) {
-				pw.println("inserted successfully");
-			} else {
-				pw.println("Error occurred while inserting ");
-			}
-		} catch (PlayerManagementException e) {
-			e.printStackTrace();
-		}
-		
-	}
 
 }

@@ -32,7 +32,6 @@
 			<table class="table bg-info">
 				<form:input type="hidden" path="id" />
 				<form:input type="hidden" path="playerCode" />
-				<%-- <form:input type = "hidden" path ="createdAt"/> --%>
 				<tr>
 					<td>Name</td>
 					<td><form:input path="name" /></td>
@@ -59,7 +58,7 @@
 					<td>Email</td>
 					<td><form:input path="email" /></td>
 				</tr>
-				
+
 				<tr>
 					<td>Delete</td>
 					<td><form:input path="deleted" /></td>

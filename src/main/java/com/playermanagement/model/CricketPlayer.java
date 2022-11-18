@@ -12,6 +12,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
+
 import com.playermanagement.util.constant.Gender;
 import com.playermanagement.util.DateUtil;
 
@@ -22,6 +26,7 @@ import com.playermanagement.util.DateUtil;
  */
 @Entity
 @Table(name = "players")
+@SQLDelete(sql = "UPDATE players SET is_deleted = 1 WHERE id = ?",check=ResultCheckStyle.COUNT)
 public class CricketPlayer extends BaseModel {
 
 	private String playerCode;

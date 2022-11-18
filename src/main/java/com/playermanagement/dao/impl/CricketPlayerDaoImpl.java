@@ -85,14 +85,9 @@ public class CricketPlayerDaoImpl implements CricketPlayerDao {
 	@Transactional
 	public boolean deletePlayerById(int id) throws PlayerManagementException {
 		try {
-			System.out.println(id);
 			CricketPlayer cricketPlayer = this.hibernateTemplate.load(CricketPlayer.class, id);
-			if (null != cricketPlayer) {
-				this.hibernateTemplate.delete(cricketPlayer);
-				return true;
-			} else {
-				return false;
-			}
+			this.hibernateTemplate.delete(cricketPlayer);
+			return true;
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
 		}
@@ -105,7 +100,8 @@ public class CricketPlayerDaoImpl implements CricketPlayerDao {
 	@Transactional
 	public CricketPlayer updatePlayer(CricketPlayer cricketPlayer) throws PlayerManagementException {
 		try {
-			this.hibernateTemplate.update(cricketPlayer);
+			System.out.println(cricketPlayer);
+			this.hibernateTemplate.saveOrUpdate(cricketPlayer);
 		} catch (HibernateException hibernateException) {
 			throw new PlayerManagementException(hibernateException.getMessage());
 		}

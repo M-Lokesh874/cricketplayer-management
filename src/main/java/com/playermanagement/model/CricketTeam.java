@@ -9,8 +9,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
+
 @Entity
 @Table(name = "teams")
+@SQLDelete(sql = "update teams set is_deleted = 1 where id = ?", check=ResultCheckStyle.COUNT)
 public class CricketTeam extends BaseModel {
 
 	private String name;

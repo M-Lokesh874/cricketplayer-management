@@ -2,8 +2,9 @@ package com.playermanagement.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.playermanagement.dao.CricketPlayerStatsDao;
-import com.playermanagement.dao.impl.CricketPlayerStatsDaoImpl;
 import com.playermanagement.model.CricketPlayer;
 import com.playermanagement.model.CricketPlayerStats;
 import com.playermanagement.service.CricketPlayerStatsService;
@@ -17,9 +18,11 @@ import com.playermanagement.util.exception.PlayerManagementException;
  *
  * @author Lokesh
  */
+@Service
 public class CricketPlayerStatsServiceImpl implements CricketPlayerStatsService {
 
-	private CricketPlayerStatsDao cricketPlayerStatsDao = new CricketPlayerStatsDaoImpl();
+	@Autowired
+	private CricketPlayerStatsDao cricketPlayerStatsDao;
 
 	public CricketPlayerStats createStats(int noOfMatch, int totalRun, double battingAverage, int topScore,
 			int noOfBallsFaced, double strikeRate) throws PlayerManagementException {
@@ -62,6 +65,13 @@ public class CricketPlayerStatsServiceImpl implements CricketPlayerStatsService 
 			throws PlayerManagementException {
 
 		return cricketPlayerStatsDao.assignPlayer(cricketPlayerStats, cricketPlayer);
+	}
+
+	@Override
+	public CricketPlayerStats createStats(CricketPlayerStats cricketPlayerStats, CricketPlayer cricketPlayer) throws PlayerManagementException {
+		cricketPlayerStats.setCricketPlayer(cricketPlayer);
+		return cricketPlayerStatsDao.insertStats(cricketPlayerStats);
+		
 	}
 
 }

@@ -26,7 +26,7 @@
 				<div class="button btn-info btn-sm">Cricket teams</div>
 		</a></li>
 		<br>
-		<li><a href="playerStats">
+		<li><a href="playerstats">
 				<div class="button btn-info btn-sm">Player stats</div>
 		</a></li>
 		<br>

@@ -21,7 +21,7 @@
 		<br>
 		<table>
 			<tr>
-				<td><a href="createTeam.jsp"><button type="button"
+				<td><a href="createteam"><button type="button"
 							class="btn-info btn-sm">create team</button></a><br></td>
 			</tr>
 			<tr>
